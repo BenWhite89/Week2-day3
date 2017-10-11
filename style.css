@@ -1,0 +1,44 @@
+.input-box {
+  float: left;
+  padding-right: 2em;
+}
+
+.box {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  position: relative;
+  float:left;
+  width: 100%;
+  padding-bottom: 2em;
+}
+
+.display {
+  position: relative;
+  float:left;
+  top: 0em; 
+  width: 100%;
+}
+
+.display-area {
+  background-image: url(background.jpg);
+  background-repeat: no-repeat;
+  width: 600px;
+  height: 600px;
+  float: left;
+  padding-right: 2em;
+}
+
+.statistics {
+  float: left;
+  border-style: solid;
+  border-width: .1em;
+  border-color: black;
+  width: 300px;
+}
+
+.stats-form {
+  padding: .5em;
+}

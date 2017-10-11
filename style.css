@@ -29,6 +29,7 @@
   height: 600px;
   float: left;
   padding-right: 2em;
+  z-index: 0;
 }
 
 .statistics {
@@ -41,4 +42,36 @@
 
 .stats-form {
   padding: .5em;
+}
+
+.triangle {
+  height: 0;
+  width: 0;
+  border-right-style: solid;
+  border-right-color: transparent;
+  border-bottom-style: solid;
+  border-bottom-color: yellow;
+}
+
+.square {
+  background: red;
+}
+
+.rectangle {
+  background: green;
+}
+
+.circle {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: purple;
+}
+
+.shape {
+  position: absolute;
+}
+
+output {
+  text-align: right;
 }

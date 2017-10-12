@@ -1,13 +1,11 @@
 $(document).ready(function() {
 
- 
   let holder = [];
 
   var Shape = function(height, width) {
     this.height = height;
     this.width = width;
     this.index = counter; 
-    
   }
 
   Shape.prototype.describe = function() {
@@ -50,8 +48,6 @@ $(document).ready(function() {
     }
   }
     
-  
-
   var searchIndex = function(a,b) {
     for (let i = 0; i < b.length; i++){
       if (b[i].index == a) {
@@ -75,11 +71,11 @@ $(document).ready(function() {
   Rectangle.prototype.constructor = Rectangle;
 
   var Square = function(height) {
-    Rectangle.call(this, height);
+    Rectangle.call(this, height, height);
     this.width = height;
     this.dispHeight = height;
     this.dispWidth = height;
-    this.x = width;
+    this.x = height;
     this.y = height;
     this.name = 'square';
     this.area = height * height;
@@ -125,26 +121,19 @@ $(document).ready(function() {
 
   let counter = 0
 
-  
   $(`#rectangle-form`).on('submit', function(e) {
     e.preventDefault();
     var height = $(`#rectangle-height`).val();
         width = $(`#rectangle-width`).val();
-    if (height && width) {
-      var newRec = new Rectangle(height, width);
-        
+        newRec = new Rectangle(height, width);
+
       newRec.draw();
       holder.push(newRec);
-    } else if (height) {
-      alert('Missing width!');
-    } else {
-      alert('Missing height!');
-    }
   })
   
   $(`#square-form`).on('submit', function(e) {
     e.preventDefault();
-    var height = $(`#square-height`).val();
+    var height = $(`#square-height`).val(); 
         newSq = new Square(height);
         
     newSq.draw();
@@ -168,5 +157,4 @@ $(document).ready(function() {
     newTri.draw();
     holder.push(newTri);
   })
-
 })

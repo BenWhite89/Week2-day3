@@ -15,28 +15,49 @@ $(document).ready(function() {
     $(`.op-width`).append(this.dispWidth);
     $(`.op-height`).append(this.dispHeight);
     $(`.op-radius`).append(this.dispRadius);
-    $(`.op-area`).append(this.area);
-    $(`.op-perimeter`).append(this.perimeter);
+    $(`.op-area`).append(this.area.toLocaleString('en', {useGrouping:true}));
+    $(`.op-perimeter`).append((this.perimeter).toLocaleString('en', {useGrouping:true}));
   }
 
   Shape.prototype.draw = function() {
     x = Math.floor(Math.random() * (600-this.x));
     y = Math.floor(Math.random() * (600-this.y));
-    $(".display-area").append(`<div id=${this.index} class='shape ${this.name}' style='top:${y}px;left:${x}px;height:${this.height}px;width:${this.width}px;border-bottom-width:${this.borderHeight}px;border-right-width:${this.borderHeight}px;z-index:${this.index};'></div>`);
-    $(`#${this.index}`).click(function() {
-      $(`.op-name`).empty();
-      $(`.op-width`).empty();
-      $(`.op-height`).empty();
-      $(`.op-radius`).empty();
-      $(`.op-area`).empty();
-      $(`.op-perimeter`).empty();
-      
-      holder[this.id].describe();
-    });
-    $(`#${this.index}`).dblclick(function() {
-      this.remove();
-    })  
-    counter++
+
+    if (this.x > 600 || this.y > 600) {
+      alert('Number too big!');
+    } else {
+      $(".display-area").append(`<div id=${this.index} class='shape ${this.name}' style='top:${y}px;left:${x}px;height:${this.height}px;width:${this.width}px;border-bottom-width:${this.borderHeight}px;border-right-width:${this.borderHeight}px;z-index:${this.index};'></div>`);
+      $(`#${this.index}`).click(function() {
+        $(`.op-name`).empty();
+        $(`.op-width`).empty();
+        $(`.op-height`).empty();
+        $(`.op-radius`).empty();
+        $(`.op-area`).empty();
+        $(`.op-perimeter`).empty();
+        console.log(this.id);
+        var describeIndex = searchIndex(this.id, holder);
+        holder[describeIndex].describe();
+      });
+      $(`#${this.index}`).dblclick(function() {
+        
+        this.remove();
+        var removeIndex = searchIndex(this.id, holder);
+        console.log(holder);
+        holder.splice(removeIndex,1);
+        console.log(holder);
+      })
+      counter++
+    }
+  }
+    
+  
+
+  var searchIndex = function(a,b) {
+    for (let i = 0; i < b.length; i++){
+      if (b[i].index == a) {
+        return i;
+      }
+    }
   }
 
   var Rectangle = function(height, width) {
@@ -109,10 +130,16 @@ $(document).ready(function() {
     e.preventDefault();
     var height = $(`#rectangle-height`).val();
         width = $(`#rectangle-width`).val();
-        newRec = new Rectangle(height, width);
+    if (height && width) {
+      var newRec = new Rectangle(height, width);
         
-    newRec.draw();
-    holder.push(newRec);
+      newRec.draw();
+      holder.push(newRec);
+    } else if (height) {
+      alert('Missing width!');
+    } else {
+      alert('Missing height!');
+    }
   })
   
   $(`#square-form`).on('submit', function(e) {
